@@ -28,4 +28,16 @@ public class GoodsTypeDaoImpl implements GoodsTypeDao {
             throw new RuntimeException("查询商品类型失败", e);
         }
     }
+
+    @Override
+    public GoodsType findById(int typeid) {
+        String sql = "select * from tb_goods_type where id=?";
+        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            return qr.query(sql,new BeanHandler<>(GoodsType.class),typeid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("根据id查询商品类型失败", e);
+        }
+    }
 }

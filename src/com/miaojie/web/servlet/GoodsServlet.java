@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "GoodsServlet" ,value = "/goodsservlet")
 public class GoodsServlet extends BaseServlet {
+    //分页
     public String getGoodsListByTypeId(HttpServletRequest request,HttpServletResponse response) throws Exception{
         String typeId = request.getParameter("typeId");
         String _pageNum = request.getParameter("pageNum");
@@ -39,18 +40,30 @@ public class GoodsServlet extends BaseServlet {
         GoodsService goodsService = new GoodsServiceImpl();
         //定义条件
         String condition="";
-        if(typeId!=null && typeId.trim().length()!=0) {
+        if(typeId != null && typeId.trim().length() != 0) {
             condition = "typeid=" + typeId;
         }
 
         try {
-            PageBean<Goods> pageBean=goodsService.findPageByWhere(pageNum,pageSize,condition);  // typeId=1;
+            PageBean<Goods> pageBean = goodsService.findPageByWhere(pageNum,pageSize,condition);  // typeId=1;
             request.setAttribute("pageBean", pageBean);
-
-            return "/goodsList.jsp";
+            request.setAttribute("typeId", typeId);
+            return "/goodsList.jsp";//转发
         } catch (Exception e) {
             e.printStackTrace();
+            return "redirect:/index.jsp";//重定向
+        }
+    }
+    //商品详情
+    public String getGoodsById(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        String id = request.getParameter("id");
+        GoodsService goodsService = new GoodsServiceImpl();
+        if(StringUtils.isEmpty(id)){
             return "redirect:/index.jsp";
         }
+        Goods goods = goodsService.findById(Integer.parseInt(id));
+        request.setAttribute("goods", goods);
+
+        return "/goodsDetail.jsp";
     }
 }

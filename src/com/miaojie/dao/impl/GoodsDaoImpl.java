@@ -34,8 +34,8 @@ public class GoodsDaoImpl implements GoodsDao {
 
     @Override
     public List<Goods> findPageByWhere(int pageNum,int pageSize,String condition) {
-        String  sql="select * from tb_goods";
-        if(condition!=null&&condition.trim().length()!=0){
+        String sql = "select * from tb_goods";
+        if(condition != null && condition.trim().length() != 0){
             sql=sql+" where "+condition;   // select *  from tb_goods  where  typeId=1
         }
         sql+=" order by id limit ?,?";
@@ -45,7 +45,19 @@ public class GoodsDaoImpl implements GoodsDao {
             return qr.query(sql,new BeanListHandler<Goods>(Goods.class),(pageNum-1)*pageSize,pageSize);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw  new RuntimeException("分页查询失败", e);
+            throw new RuntimeException("分页查询失败", e);
+        }
+    }
+
+    @Override
+    public Goods findById(int gid) {
+        String sql = "select * from tb_goods where id=?";
+        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            return qr.query(sql, new BeanHandler<>(Goods.class),gid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("商品查询失败", e);
         }
     }
 }

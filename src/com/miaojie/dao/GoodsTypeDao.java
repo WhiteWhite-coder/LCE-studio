@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface GoodsTypeDao {
     List<GoodsType> findByLevel(int level);
+
+    GoodsType findById(int typeid);
 }

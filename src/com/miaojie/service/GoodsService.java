@@ -9,4 +9,6 @@ import com.miaojie.domain.PageBean;
  */
 public interface GoodsService {
     PageBean<Goods> findPageByWhere(int pageNum,int pageSize,String condition);
+
+    Goods findById(int gid);
 }

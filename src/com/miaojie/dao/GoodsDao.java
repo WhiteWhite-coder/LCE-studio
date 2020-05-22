@@ -12,4 +12,6 @@ public interface GoodsDao {
     long getCount(String condition);
 
     List<Goods> findPageByWhere(int pageNum,int pageSize,String condition);
+
+    Goods findById(int gid);
 }

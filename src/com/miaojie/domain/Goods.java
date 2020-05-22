@@ -31,6 +31,7 @@ public class Goods {
     private Integer star;//商品等级 0-5
     private String intro;//介绍
     private Integer typeid;
+    private GoodsType goodsType;
 
     public Goods(Integer id, String name, Date pubdate, String picture, BigDecimal price, Integer star, String intro, Integer typeid) {
         this.id = id;
@@ -108,6 +109,14 @@ public class Goods {
 
     public void setTypeid(Integer typeid) {
         this.typeid = typeid;
+    }
+
+    public GoodsType getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(GoodsType goodsType) {
+        this.goodsType = goodsType;
     }
 
     @Override
