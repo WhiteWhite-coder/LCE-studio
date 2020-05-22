@@ -19,9 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 public class GoodsServlet extends BaseServlet {
     //分页
     public String getGoodsListByTypeId(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //1.获得参数
         String typeId = request.getParameter("typeId");
         String _pageNum = request.getParameter("pageNum");
         String _pageSize = request.getParameter("pageSize");
+        //2.判空前提
         int pageNum = 1;
         int pageSize = 8;
         if(!StringUtils.isEmpty(_pageNum)){
@@ -38,12 +40,12 @@ public class GoodsServlet extends BaseServlet {
         }
 
         GoodsService goodsService = new GoodsServiceImpl();
-        //定义条件
+        //3.定义条件
         String condition="";
         if(typeId != null && typeId.trim().length() != 0) {
             condition = "typeid=" + typeId;
         }
-
+        //4.发送
         try {
             PageBean<Goods> pageBean = goodsService.findPageByWhere(pageNum,pageSize,condition);  // typeId=1;
             request.setAttribute("pageBean", pageBean);

@@ -82,7 +82,8 @@ public class UserDaoImpl implements UserDao {
     public void add(User user) {
         String sql = "insert into tb_user(username,password,email,gender,flag,role,code) values(?,?,?,?,?,?,?)";
         QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
-        Object[] params={user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getFlag(),user.getRole(),user.getCode()};
+        Object[] params={user.getUsername(),user.getPassword(),user.getEmail(),
+                user.getGender(),user.getFlag(),user.getRole(),user.getCode()};
         try {
             qr.update(sql,params);
         } catch (SQLException e) {
@@ -95,7 +96,8 @@ public class UserDaoImpl implements UserDao {
     public void updata(User user) {
         String sql = "update  tb_user set username=?,password=?,email=?,gender=?,flag=? where id=?";
         QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
-        Object[] params={user.getUsername(),user.getPassword(),user.getEmail(),user.getGender(),user.getFlag(),user.getId()};
+        Object[] params={user.getUsername(),user.getPassword(),user.getEmail(),
+                user.getGender(),user.getFlag(),user.getId()};
         try {
             qr.update(sql,params);
         } catch (SQLException e) {

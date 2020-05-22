@@ -18,18 +18,17 @@ import java.util.List;
 public class GoodsDaoImpl implements GoodsDao {
     @Override
     public long getCount(String condition) {  //" typeId=1";
-        String  sql="select count(*) from tb_goods";
-        if(condition!=null&&condition.trim().length()!=0){
-            sql=sql+" where "+condition;   // select count(*) from tb_goods  where  typeId=1
+        String sql = "select count(*) from tb_goods";
+        if(condition != null && condition.trim().length() != 0){
+            sql = sql + " where "+condition;   // select count(*) from tb_goods  where  typeId=1
         }
-        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         try {
             return (long) qr.query(sql, new ScalarHandler());
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("查询商品个数失败", e);
         }
-
     }
 
     @Override
@@ -52,7 +51,7 @@ public class GoodsDaoImpl implements GoodsDao {
     @Override
     public Goods findById(int gid) {
         String sql = "select * from tb_goods where id=?";
-        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         try {
             return qr.query(sql, new BeanHandler<>(Goods.class),gid);
         } catch (SQLException e) {
