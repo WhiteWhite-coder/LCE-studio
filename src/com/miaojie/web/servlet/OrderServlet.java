@@ -31,13 +31,13 @@ public class OrderServlet extends BaseServlet {
             return "redirect:/login.jsp";//没有登录则去登录界面
         }
         //2.查询购买的商品
-        CartService cartService = new CartServiceImpl();
+        CartService cartService=new CartServiceImpl();
         List<Cart> carts = cartService.findByUid(user.getId());
-        request.setAttribute("carts",carts);
+        request.setAttribute("carts", carts);
         //3.获取收获地址（根据用户uid）
         AddressService addressService = new AddressServiceImpl();
         List<Address> addList = addressService.findByUid(user.getId());
-        request.setAttribute("addList",addList);
+        request.setAttribute("addList", addList);
         return "/order.jsp";
     }
 }

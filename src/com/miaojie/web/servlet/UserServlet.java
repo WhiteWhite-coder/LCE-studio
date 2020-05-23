@@ -127,7 +127,8 @@ public class UserServlet extends BaseServlet {
             if(user.getRole()!=1){
                 //权限role=0
                 if(user.getRole()==0){
-                    return "admin/login.jsp";
+                    request.getSession().setAttribute("admin", username);
+                    return "redirect:/admin/admin.jsp";
                 }
                 request.setAttribute("msg", "用户没有权限");
                 return "/login.jsp";

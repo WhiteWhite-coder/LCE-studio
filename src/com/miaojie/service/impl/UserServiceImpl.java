@@ -7,6 +7,8 @@ import com.miaojie.service.UserService;
 import com.miaojie.utils.EmailUtils;
 import com.miaojie.utils.Md5Utils;
 
+import java.util.List;
+
 /**
  *  作者：吴淼杰
  *  注释：老天保佑，佛祖保佑，别出bug！
@@ -34,5 +36,22 @@ public class UserServiceImpl implements UserService {
         //把密码加密后再比对
         password=Md5Utils.md5(password);
         return userDao.findByUserNameAndPassword(username, password);
+    }
+
+    @Override
+    public User findAdmin(String username) {
+        return userDao.findAdmin(username);
+    }
+    @Override
+    public List<User> getUserList() {
+        return userDao.getUserList();
+    }
+    @Override
+    public boolean deleteUser(int id) {
+        return userDao.deleteUser(id);
+    }
+    @Override
+    public List<User> searchUser(String username, String gender) {
+        return userDao.searchUser(username, gender);
     }
 }

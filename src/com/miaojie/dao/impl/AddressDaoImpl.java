@@ -20,7 +20,7 @@ public class AddressDaoImpl implements AddressDao {
         String sql = "select * from tb_address where uid=?";
         QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         try {
-            return qr.query(sql, new BeanListHandler<>(Address.class),uid);
+            return qr.query(sql, new BeanListHandler<Address>(Address.class),uid);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("查询订单失败", e);

@@ -37,10 +37,6 @@
 							<option value="8">红米</option>
 						</select>
 					</div>
-					<div class="form-group form-inline">
-						<label>时间:</label>
-						<input type="text" name="pubdate" readonly="readonly" class="form-control" onclick="setday(this)" />
-					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group form-inline">

@@ -24,9 +24,9 @@
  <div id="top">
     	<div id="topdiv">
             <span>
-                <a href="index.jsp" id="a_top" target="_blank">小米商城</a>
+                <a href="index.jsp" id="a_top" target="_blank">商城</a>
                 <li>|</li>
-                <a href="" id="a_top">小米商城移动版</a>
+                <a href="" id="a_top">商城移动版</a>
                 <li>|</li>
                 <a href="" id="a_top">问题反馈</a>
             </span>
@@ -45,14 +45,12 @@
        				<li>|</li>
        				<a href="userservlet?method=getAddress" id="a_top">地址管理</a>
        			</c:if>
-                <li>|</li>
-                <a href="" id="a_top">消息通知</a>
                 <a href="${pageContext.request.contextPath}/cartservlet?method=getCart" id="shorpcar">购物车</a>
             </span>
         </div>
  </div>
 <div id="second">
-	    <a href="" id="seimg" style=" margin-top:23px;"><img id="logo" src="image/logo_top.png" width="55" height="54"/></a>
+	    <!-- <a href="" id="seimg" style=" margin-top:23px;"><img id="logo" src="image/logo_top.png" width="55" height="54"/></a>-->
         <a href="" id="seimg" style=" margin-top:17px;"><img id="gif" src="image/yyymix.gif" width="180" height="66" /></a>
         <p id="goodsType">
 			<!-- 根据ajax 回调函数 填写数据 到此id中 -->
@@ -62,6 +60,9 @@
 		  <div class="form-group">
 		    <input type="text" class="form-control" style="width: 400px"  placeholder="搜索一下好东西...">
 		  </div>
-		  <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;搜索</button>
+		  <button type="submit" class="btn btn-warning">
+			  <span class="glyphicon glyphicon-search">
+			  </span>&nbsp;&nbsp;搜索
+		  </button>
 	  </form>
 </div>

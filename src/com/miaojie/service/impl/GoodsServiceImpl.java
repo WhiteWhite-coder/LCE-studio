@@ -38,4 +38,39 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setGoodsType(goodsType);
         return goods;
     }
+
+    @Override
+    public List<Goods> getGoodsList() {
+        // TODO Auto-generated method stub
+        return goodsDao.getGoodsList();
+    }
+    @Override
+    public List<GoodsType> getGoodsTypeList() {
+        // TODO Auto-generated method stub
+        return goodsDao.getGoodsTypeList();
+    }
+    @Override
+    public boolean addGoodsType(GoodsType gt) {
+        // TODO Auto-generated method stub
+        return goodsDao.addGoodsType(gt);
+    }
+    public boolean addGoods(Goods goods) {
+        // TODO Auto-generated method stub
+        return goodsDao.addGoods(goods);
+    }
+    @Override
+    public Integer getGoodsTypeLevel(int id) {
+        // TODO Auto-generated method stub
+        return goodsDao.getGoodsTypeLevel(id);
+    }
+
+    @Override
+    public boolean deleteGood(int id) {
+        return goodsDao.deleteGood(id);
+    }
+
+    @Override
+    public void updateGoods(Goods goods) {
+        goodsDao.updateGoods(goods);
+    }
 }

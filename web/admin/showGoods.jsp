@@ -1,18 +1,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/bootstrap.min.css" />
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/DatePicker.js"></script>
-<title>商品列表</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/DatePicker.js"></script>
+	<title>商品列表</title>
+
+	<script type="text/javascript">
+		function DelGood(GoodId){
+			//安全提示
+			if(confirm("您确定要删除吗？")){
+				location.href="${pageContext.request.contextPath}/deleteGood?id="+GoodId;
+			}
+		}
+		function ChangeGood(GoodId){
+			location.href="${pageContext.request.contextPath}/deleteGood?id="+GoodId;
+		}
+	</script>
 
 </head>
 <body>
@@ -43,7 +55,11 @@
 				<div style="height: 400px;overflow: scroll;">
 					<table id="tb_list" class="table table-striped table-hover table-bordered">
 						<tr>
-							<td>序号</td><td>商品名称</td><td>价格</td><td>上架时间</td><td>类型</td><td>操作</td>
+							<td>序号</td>
+							<td>商品名称</td>
+							<td>价格</td>
+							<td>上架时间</td>
+							<td>操作</td>
 						</tr>
 						<c:forEach items="${goodsList}" var="goods" varStatus="i">
 							<tr>
@@ -51,13 +67,14 @@
 								<td>${goods.name}</td>
 								<td>${goods.price}</td>
 								<td>${goods.pubdate}</td>
-								<td>${goods.typeName}</td>
-								<td>删除 &nbsp;修改 &nbsp;
+								<td>
+									<a class="btn btn-warning btn-sm" href="${pageContext.request.contextPath}/findGoodServlet?id=${goods.id}">修改</a>
+									<a class="btn btn-warning btn-sm" href="javascript:DelGood(${goods.id})">删除</a>
 									<a tabindex="0" id="example${goods.id}" class="btn btn-primary btn-xs"
-									role="button" data-toggle="popover"
-									data-trigger="focus"
-									data-placement="left"
-									data-content="${goods.intro}">描述</a>
+									   role="button" data-toggle="popover"
+									   data-trigger="focus"
+									   data-placement="left"
+									   data-content="${goods.intro}">描述</a>
 									<script type="text/javascript">
 										$(function(){
 											$("#example${goods.id}").popover();
@@ -69,7 +86,7 @@
 					</table>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>

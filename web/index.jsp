@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/login2.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<title>小米商城首页</title>
+<title>商城首页</title>
  <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script> 
 </head>
@@ -31,7 +31,7 @@
     	<a href="" id="a_left"><img src="image/pinghengche.jpg" width="316" height="170" /></a>
    </div>
    <div id="fifth">
-   		<span id="fif_text">小米明星单品</span>
+   		<span id="fif_text">商品展示</span>
    </div>
     <div id="sixth">
             <span style="margin-left:0px; border-top:#ffa500 1px solid">
