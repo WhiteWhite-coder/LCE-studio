@@ -38,15 +38,15 @@
  					
  				</tr>
  				<c:set value="0" var="sum"></c:set>
- 				<c:forEach items="${cart.map}" var="entry" varStatus="i">
+ 				<c:forEach items="${carts}" var="entry" varStatus="i">
 	 				<tr>
 	 					<th>${i.count}</th>
-	 					<th>${entry.value.goods.name}</th>
-	 					<th>${entry.value.goods.price}</th>
-	 					<th>${entry.value.number}</th>
-	 					<th>${entry.value.money}</th>
+	 					<th>${c.goods.name}</th>
+	 					<th>${c.goods.price}</th>
+	 					<th>${c.number}</th>
+	 					<th>${c.money}</th>
 	 				</tr>
-	 				<c:set var="sum" value="${sum+entry.value.money}"></c:set>
+	 				<c:set var="sum" value="${sum+c.money}"></c:set>
  				</c:forEach>
  				<tr>
  				 <td colspan="5">
