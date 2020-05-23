@@ -77,4 +77,39 @@ public class CartServlet extends BaseServlet {
         request.setAttribute("carts",carts);
         return "/cart.jsp";
     }
+    //修改购物车
+    public String addCartAjax(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        //"cartservlet?method=addCartAjax&goodsId="+pid+"&number=1"
+        //"cartservlet?method=addCartAjax&goodsId="+pid+"&number="+num
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.得到参数
+        String goodsId = request.getParameter("goodsId");
+        String number = request.getParameter("number");
+        //3.查询
+        CartService cartService = new CartServiceImpl();
+        Cart cart = cartService.findByUidAndPid(user.getId(),Integer.parseInt(goodsId));
+        if(cart != null){
+            //4.判断num参数 0 删除 1 增加 -1 减少
+            if(number.equals("0")){
+                //删除
+                cartService.delete(user.getId(),Integer.parseInt(goodsId));
+            }else{
+                //更新
+                int num = Integer.parseInt(number);//1 or -1
+                //获取单价
+                BigDecimal price = cart.getMoney().divide(new BigDecimal(cart.getNum()));
+                //更新数量
+                cart.setNum(cart.getNum() + num);
+                //更新购物车金额
+                cart.setMoney(price.multiply(new BigDecimal(cart.getNum())));//goods.getPrice().multiply(new BigDecimal(num))
+                //真正更新
+                cartService.update(cart);
+            }
+        }
+        return null;
+    }
 }

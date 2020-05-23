@@ -16,4 +16,6 @@ public interface CartService {
     void update(Cart cart);
 
     List<Cart> findByUid(int uid);
+
+    void delete(int uid, int pid);
 }
