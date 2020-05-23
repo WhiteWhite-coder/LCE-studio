@@ -16,7 +16,6 @@ public class AddGoodsType extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String typename = req.getParameter("typename");
 		String goodsParentId = req.getParameter("goodsParent");
 		//1.先获取 所属分类的等级 level 1-2-3

@@ -39,10 +39,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findAdmin(String username) {
-        return userDao.findAdmin(username);
-    }
-    @Override
     public List<User> getUserList() {
         return userDao.getUserList();
     }

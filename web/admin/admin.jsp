@@ -57,9 +57,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#"> 
-					<span class="glyphicon glyphicon-off"></span>注销
-				</a>
+				<a href="adminservlet?method=logOut" id="a_top">注销</a>
 			</li>
 		</ul>
 		<!--左侧边栏 -->

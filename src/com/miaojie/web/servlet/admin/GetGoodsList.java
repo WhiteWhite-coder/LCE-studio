@@ -22,7 +22,6 @@ public class GetGoodsList extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		GoodsService goodsService = new GoodsServiceImpl();
 		List<Goods> list = goodsService.getGoodsList();
 		req.getSession().setAttribute("goodsList", list);

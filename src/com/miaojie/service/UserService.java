@@ -23,13 +23,10 @@ public interface UserService {
      */
     User login(String username,String password);
 
-    //后台
-    //1.管理员登录
-    public User findAdmin(String username);
-    //2.查询用户列表
+    //查询用户列表
     public List<User> getUserList();
-    //3.删除用户信息
+    //删除用户信息
     public boolean deleteUser(int id);
-    //4.条件查询用户列表
+    //条件查询用户列表
     public List<User> searchUser(String username,String gender);
 }

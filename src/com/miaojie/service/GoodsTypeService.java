@@ -9,6 +9,5 @@ import java.util.List;
  * 老天保佑，佛祖保佑，别出bug！
  */
 public interface GoodsTypeService {
-
     List<GoodsType> getTypeByLevel(int i);
 }

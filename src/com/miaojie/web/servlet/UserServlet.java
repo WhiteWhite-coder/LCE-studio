@@ -155,13 +155,6 @@ public class UserServlet extends BaseServlet {
 
     }
 
-    /**
-     * 验证码
-     *
-     * @param request
-     * @param response
-     * @return
-     */
     public String code(HttpServletRequest request, HttpServletResponse response) throws Exception{
         //1.创建验证码,validate封装的方法
         ValidateCode validateCode = new ValidateCode(100, 40, 4, 20);
@@ -175,13 +168,6 @@ public class UserServlet extends BaseServlet {
         return null;
     }
 
-    /**
-     * 验证输入的验证码是否正确
-     *
-     * @param request
-     * @param response
-     * @return
-     */
     public String checkCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //1.1.接收浏览器传来的验证码
         String clientcode= request.getParameter("code");
@@ -200,7 +186,6 @@ public class UserServlet extends BaseServlet {
         return null;
     }
 
-    //退出功能
     public String logOut(HttpServletRequest request,HttpServletResponse response) throws Exception{
         //1.删除session中的用户数据
         request.getSession().removeAttribute("user");

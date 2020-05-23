@@ -21,7 +21,6 @@ public class GetUserList extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		UserService userService = new UserServiceImpl();
 		List<User> list = userService.getUserList();
 		//将list集合 转换成 json格式字符串

@@ -119,44 +119,33 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findAdmin(String username) {
-        User user = null;
-        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
-        try {
-            user = qr.query("select * from tb_user where username=? and flag=1 and role=0", new BeanHandler<User>(User.class),username);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return user;
-    }
-    @Override
     public List<User> getUserList() {
-        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "select * from tb_user where flag=1";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         try {
-            List<User> list = qr.query("select * from tb_user where flag=1", new BeanListHandler<User>(User.class));
-            if(list!=null)
-                return list;
+            return qr.query(sql, new BeanListHandler<User>(User.class));
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new RuntimeException("获取用户失败", e);
         }
-        return null;
     }
+
     @Override
     public boolean deleteUser(int id) {
-        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
         String sql = "update tb_user set flag=2 where id=?";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
         try {
             int res = qr.update(sql,id);
-            if(res>0)
+            if(res > 0){
                 return true;
+            }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new RuntimeException("删除用户失败", e);
         }
         return false;
     }
+
     @Override
     public List<User> searchUser(String username, String gender) {
         String sql = "select * from tb_user where flag=1";
@@ -173,7 +162,6 @@ public class UserDaoImpl implements UserDao {
                 return list;
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return null;

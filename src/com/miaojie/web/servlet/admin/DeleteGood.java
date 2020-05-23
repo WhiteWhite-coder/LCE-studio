@@ -20,7 +20,6 @@ import java.io.IOException;
 @WebServlet("/deleteGood")
 public class DeleteGood extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
         String id = request.getParameter("id");
         GoodsService goodsService = new GoodsServiceImpl();
         if(goodsService.deleteGood(Integer.parseInt(id))){
