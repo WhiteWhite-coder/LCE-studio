@@ -112,4 +112,17 @@ public class CartServlet extends BaseServlet {
         }
         return null;
     }
+    //情况购物车
+    public String clearCartAjax(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.清空
+        CartService cartService = new CartServiceImpl();
+        cartService.deleteByUid(user.getId());
+
+        return null;
+    }
 }

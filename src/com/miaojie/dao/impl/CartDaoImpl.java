@@ -77,4 +77,16 @@ public class CartDaoImpl implements CartDao {
             throw new RuntimeException("删除购物车失败", e);
         }
     }
+
+    @Override
+    public void deleteByUid(int uid) {
+        String sql = "delete from tb_cart where id=?";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            qr.update(sql,uid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("清空购物车失败", e);
+        }
+    }
 }
