@@ -24,6 +24,7 @@ public class Cart {
     private Integer pid;//商品id
     private Integer num;//数量
     private BigDecimal money;//钱数
+    private Goods goods;
 
     public Cart(Integer id, Integer pid, Integer num, BigDecimal money) {
         this.id = id;
@@ -65,6 +66,14 @@ public class Cart {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
     }
 
     @Override

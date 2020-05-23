@@ -125,6 +125,10 @@ public class UserServlet extends BaseServlet {
             }
             //有没有权限role=1
             if(user.getRole()!=1){
+                //权限role=0
+                if(user.getRole()==0){
+                    return "/admin.jsp";
+                }
                 request.setAttribute("msg", "用户没有权限");
                 return "/login.jsp";
             }

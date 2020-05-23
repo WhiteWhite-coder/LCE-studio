@@ -21,9 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 @WebServlet(name = "CartServlet",value = "/cartservlet")
 public class CartServlet extends BaseServlet {
+    //添加或更新购物车
     public String addCart(HttpServletRequest request, HttpServletResponse response) throws Exception{
         //1.判断用户有没有登录
         User user = (User) request.getSession().getAttribute("user");
@@ -62,5 +64,17 @@ public class CartServlet extends BaseServlet {
         }
 
     }
-
+    //查看购物车
+    public String getCart(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.查询
+        CartService cartService = new CartServiceImpl();
+        List<Cart> carts = cartService.findByUid(user.getId());
+        request.setAttribute("carts",carts);
+        return "/cart.jsp";
+    }
 }

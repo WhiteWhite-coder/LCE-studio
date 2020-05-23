@@ -6,8 +6,10 @@ import com.miaojie.domain.User;
 import com.miaojie.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author 吴淼杰
@@ -49,6 +51,18 @@ public class CartDaoImpl implements CartDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("更新购物车失败", e);
+        }
+    }
+
+    @Override
+    public List<Cart> findByUid(int uid) {
+        String sql = "select * from tb_cart where id=?";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            return qr.query(sql, new BeanListHandler<>(Cart.class),uid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("查询购物车失败", e);
         }
     }
 }
