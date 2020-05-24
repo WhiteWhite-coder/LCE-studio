@@ -260,7 +260,7 @@ public class UserServlet extends BaseServlet {
         //2.得到参数地址id
         String id = request.getParameter("id");
         //3.修改地址级别
-        AddressService addressService = new AddressServiceImpl();
+        AddressService addressService=new AddressServiceImpl();
         addressService.updateDefault(Integer.parseInt(id),user.getId());
 
         return getAddress(request,response);
@@ -282,7 +282,36 @@ public class UserServlet extends BaseServlet {
     }
 
     public String updateAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.得到参数并判空
+        String id = request.getParameter("id");
+        String level = request.getParameter("level");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String detail = request.getParameter("detail");
+        response.setContentType("text/html;charset=utf-8");
+        if(StringUtils.isEmpty(name)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人名字不能为空');window.location='userservlet?method=getAddress'</script>");//弹出方法，当前页面地址再获取一次
+            return null;
+        }
+        if(StringUtils.isEmpty(phone)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人电话不能为空');window.location='userservlet?method=getAddress'</script>");
+            return null;
+        }
+        if(StringUtils.isEmpty(detail)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人地址不能为空');window.location='userservlet?method=getAddress'</script>");
+            return null;
+        }
+        //3.地址修改
+        Address address=new Address(Integer.parseInt(id), detail, name, phone, user.getId(), Integer.parseInt(level));
+        AddressService addressService=new AddressServiceImpl();
+        addressService.update(address);
 
-        return null;
+
+        return  getAddress(request, response);
     }
 }

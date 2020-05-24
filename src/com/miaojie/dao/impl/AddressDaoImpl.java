@@ -43,8 +43,8 @@ public class AddressDaoImpl implements AddressDao {
 
     @Override
     public void updateDefault(int aid, int uid) {
-        String sql1 = "update tb_address set levle=0 where uid=?";//把当前用户的所有地址级别设为0
-        String sql2 = "update tb_address set levle=1 where id=?";//把当前用户的aid地址级别设为1
+        String sql1 = "update tb_address set level=0 where uid=?";//把当前用户的所有地址级别设为0
+        String sql2 = "update tb_address set level=1 where id=?";//把当前用户的aid地址级别设为1
         QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
         try {
             qr.update(sql1,uid);
@@ -64,6 +64,19 @@ public class AddressDaoImpl implements AddressDao {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("删除地址失败", e);
+        }
+    }
+
+    @Override
+    public void update(Address address) {
+        String sql = "update  tb_address set name=?,phone=?,detail=? where id=?";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        Object[] params={address.getName(),address.getPhone(),address.getDetail(),address.getId()};
+        try {
+            qr.update(sql,params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("修改地址失败", e);
         }
     }
 }

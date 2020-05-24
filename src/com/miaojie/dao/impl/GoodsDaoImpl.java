@@ -155,10 +155,10 @@ public class GoodsDaoImpl implements GoodsDao {
 
     @Override
     public void updateGoods(Goods goods) {
-        String sql = "update tb_goods set name=?,picture=?,price=?,star=?,intro=?";
+        String sql = "update tb_goods set name=?,price=?,star=?";
         QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
         try {
-            qr.update(sql,goods.getName(),goods.getPicture(),goods.getPrice(),goods.getStar(),goods.getIntro());
+            qr.update(sql,goods.getName(),goods.getPrice(),goods.getStar());
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("更新商品失败", e);

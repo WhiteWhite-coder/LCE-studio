@@ -13,7 +13,6 @@
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/DatePicker.js"></script>
 	<title>商品列表</title>
-
 	<script type="text/javascript">
 		function DelGood(GoodId){
 			//安全提示
@@ -70,6 +69,7 @@
 								<td>
 									<a class="btn btn-warning btn-sm" href="${pageContext.request.contextPath}/findGoodServlet?id=${goods.id}">修改</a>
 									<a class="btn btn-warning btn-sm" href="javascript:DelGood(${goods.id})">删除</a>
+
 									<a tabindex="0" id="example${goods.id}" class="btn btn-primary btn-xs"
 									   role="button" data-toggle="popover"
 									   data-trigger="focus"

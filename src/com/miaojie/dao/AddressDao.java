@@ -17,4 +17,6 @@ public interface AddressDao {
     void updateDefault(int aid, int uid);
 
     void delete(int aid);
+
+    void update(Address address);
 }

@@ -5,15 +5,21 @@ package com.miaojie.web.servlet;
  *
  */
 
+import com.miaojie.domain.Address;
 import com.miaojie.domain.Goods;
 import com.miaojie.domain.PageBean;
+import com.miaojie.service.AddressService;
 import com.miaojie.service.GoodsService;
+import com.miaojie.service.impl.AddressServiceImpl;
 import com.miaojie.service.impl.GoodsServiceImpl;
 import com.miaojie.utils.StringUtils;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 
 @WebServlet(name = "GoodsServlet" ,value = "/goodsservlet")
 public class GoodsServlet extends BaseServlet {
@@ -68,4 +74,37 @@ public class GoodsServlet extends BaseServlet {
 
         return "/goodsDetail.jsp";
     }
+
+    /**
+    public String updateGoods(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //2.得到参数并判空
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String picture = request.getParameter("picture");
+        String price = request.getParameter("price");
+        String intro = request.getParameter("intro");
+        String star = request.getParameter("star");
+        String typeid = request.getParameter("typeid");
+        response.setContentType("text/html;charset=utf-8");
+        if(StringUtils.isEmpty(name)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人名字不能为空');window.location='userservlet?method=getAddress'</script>");//弹出方法，当前页面地址再获取一次
+            return null;
+        }
+        if(StringUtils.isEmpty(price)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人电话不能为空');window.location='userservlet?method=getAddress'</script>");
+            return null;
+        }
+        if(StringUtils.isEmpty(star)){
+            response.getWriter().write("<script type='text/javascript'>alert('收件人地址不能为空');window.location='userservlet?method=getAddress'</script>");
+            return null;
+        }
+        //3.货品修改
+        Goods goods = new Goods(Integer.parseInt(id), name, null, picture, new BigDecimal(price),
+                Integer.parseInt(star),intro,Integer.parseInt(typeid));
+        GoodsService goodsService = new GoodsServiceImpl();
+        goodsService.updateGoods(goods);
+
+        return "redirect:/admin.jsp";
+    }
+     */
 }

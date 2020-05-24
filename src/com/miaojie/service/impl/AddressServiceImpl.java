@@ -34,4 +34,9 @@ public class AddressServiceImpl implements AddressService {
     public void delete(int aid) {
         addressDao.delete(aid);
     }
+
+    @Override
+    public void update(Address address) {
+        addressDao.update(address);
+    }
 }
