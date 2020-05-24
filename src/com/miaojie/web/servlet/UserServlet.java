@@ -263,6 +263,6 @@ public class UserServlet extends BaseServlet {
         AddressService addressService = new AddressServiceImpl();
         addressService.updateDefault(Integer.parseInt(id),user.getId());
 
-        return null;
+        return getAddress(request,response);
     }
 }
