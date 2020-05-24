@@ -54,4 +54,16 @@ public class AddressDaoImpl implements AddressDao {
             throw new RuntimeException("修改地址级别失败", e);
         }
     }
+
+    @Override
+    public void delete(int aid) {
+        String sql = "delete from tb_address where id=?";
+        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            qr.update(sql,aid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("删除地址失败", e);
+        }
+    }
 }

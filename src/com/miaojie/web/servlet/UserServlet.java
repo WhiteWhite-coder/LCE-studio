@@ -265,4 +265,24 @@ public class UserServlet extends BaseServlet {
 
         return getAddress(request,response);
     }
+
+    public String deleteAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.得到参数地址id
+        String id = request.getParameter("id");
+        //3.删除地址
+        AddressService addressService = new AddressServiceImpl();
+        addressService.delete(Integer.parseInt(id));
+
+        return getAddress(request,response);
+    }
+
+    public String updateAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+
+        return null;
+    }
 }
