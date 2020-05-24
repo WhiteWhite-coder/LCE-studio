@@ -1,12 +1,16 @@
 package com.miaojie.web.servlet;
 
 import cn.dsna.util.images.ValidateCode;
+import com.miaojie.domain.Address;
 import com.miaojie.domain.User;
+import com.miaojie.service.AddressService;
 import com.miaojie.service.UserService;
+import com.miaojie.service.impl.AddressServiceImpl;
 import com.miaojie.service.impl.UserServiceImpl;
 import com.miaojie.utils.Base64Utils;
 import com.miaojie.utils.RandomUtils;
 import com.miaojie.utils.StringUtils;
+import com.sun.deploy.net.proxy.WDefaultBrowserProxyConfig;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @WebServlet(name = "UserServlet",value = "/userservlet")
 public class UserServlet extends BaseServlet {
@@ -200,4 +205,64 @@ public class UserServlet extends BaseServlet {
         return "redirect:/index.jsp";
     }
 
+    public String getAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.获取收获地址（根据用户uid）
+        AddressService addressService = new AddressServiceImpl();
+        List<Address> addList = addressService.findByUid(user.getId());
+        request.setAttribute("addList", addList);
+
+        return "/self_info.jsp";
+    }
+
+    public String addAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        request.setCharacterEncoding("utf-8");
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.得到参数并判空
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String detail = request.getParameter("detail");
+        if(StringUtils.isEmpty(name)){
+            request.setAttribute("msg","收件人名字不能为空");
+            return getAddress(request,response);//为空再去取一次
+        }
+        if(StringUtils.isEmpty(phone)){
+            request.setAttribute("msg","收件人电话不能为空");
+            return getAddress(request,response);
+        }
+        if(StringUtils.isEmpty(detail)){
+            request.setAttribute("msg","收件人地址不能为空");
+            return getAddress(request,response);
+        }
+        //3.添加地址
+        Address address = new Address(null, detail, name, phone, user.getId(),0);
+        AddressService addressService = new AddressServiceImpl();
+        addressService.add(address);
+
+        return getAddress(request,response);
+    }
+
+    public String defaultAddress(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        //levle为1即默认，level为0即普通
+        //1.判断用户有没有登录
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null){
+            return "redirect:/login.jsp";//没有登录则去登录界面
+        }
+        //2.得到参数地址id
+        String id = request.getParameter("id");
+        //3.修改地址级别
+        AddressService addressService = new AddressServiceImpl();
+        addressService.updateDefault(Integer.parseInt(id),user.getId());
+
+        return null;
+    }
 }

@@ -19,9 +19,9 @@ package com.miaojie.domain;
 //Address地址实体类
 public class Address {
     private Integer id;
-    private String detail;//详情
+    private String detail;//收件人详细地址
     private String name;//收件人
-    private String phone;//收件手机号
+    private String phone;//收件人手机号
     private Integer uid;//用户id
     private Integer level;//1 默认地址 0 自选地址
 

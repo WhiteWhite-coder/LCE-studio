@@ -10,4 +10,8 @@ import java.util.List;
  */
 public interface AddressService {
     List<Address> findByUid(int uid);
+
+    void add(Address address);
+
+    void updateDefault(int aid, int uid);
 }

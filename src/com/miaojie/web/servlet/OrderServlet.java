@@ -30,7 +30,7 @@ public class OrderServlet extends BaseServlet {
         if(user == null){
             return "redirect:/login.jsp";//没有登录则去登录界面
         }
-        //2.查询购买的商品
+        //2.查询购买的商品（根据用户uid）
         CartService cartService=new CartServiceImpl();
         List<Cart> carts = cartService.findByUid(user.getId());
         request.setAttribute("carts", carts);

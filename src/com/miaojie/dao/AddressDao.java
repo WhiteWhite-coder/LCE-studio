@@ -11,4 +11,8 @@ import java.util.List;
 public interface AddressDao {
     //根据用户id查询
     List<Address> findByUid(int uid);
+
+    void add(Address address);
+
+    void updateDefault(int aid, int uid);
 }

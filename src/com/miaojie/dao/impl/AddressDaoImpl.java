@@ -23,7 +23,35 @@ public class AddressDaoImpl implements AddressDao {
             return qr.query(sql, new BeanListHandler<Address>(Address.class),uid);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("查询订单失败", e);
+            throw new RuntimeException("查询地址失败", e);
+        }
+    }
+
+    @Override
+    public void add(Address address) {
+        String sql = "insert into tb_address(detail,name,phone,uid,level) values(?,?,?,?,?)";
+        QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+        Object[] params={address.getDetail(),address.getName(),address.getPhone(),
+                address.getUid(),address.getLevel()};
+        try {
+            qr.update(sql, params);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("添加地址失败", e);
+        }
+    }
+
+    @Override
+    public void updateDefault(int aid, int uid) {
+        String sql1 = "update tb_address set levle=0 where uid=?";//把当前用户的所有地址级别设为0
+        String sql2 = "update tb_address set levle=1 where id=?";//把当前用户的aid地址级别设为1
+        QueryRunner qr=new QueryRunner(DataSourceUtils.getDataSource());
+        try {
+            qr.update(sql1,uid);
+            qr.update(sql2,aid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("修改地址级别失败", e);
         }
     }
 }

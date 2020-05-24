@@ -19,4 +19,14 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findByUid(int uid) {
         return addressDao.findByUid(uid);
     }
+
+    @Override
+    public void add(Address address) {
+        addressDao.add(address);
+    }
+
+    @Override
+    public void updateDefault(int aid, int uid) {
+        addressDao.updateDefault(aid, uid);
+    }
 }
